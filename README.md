@@ -2,50 +2,115 @@
 {
   "depends_on": [],
   "author": "Stephan Bökelmann",
-  "first_used": "2025-03-17",
-  "keywords": ["learning", "exercises", "education", "practice"]
+  "first_used": "2025-03-31",
+  "keywords": ["transmission", "signal", "bit", "bitrate"]
 }
 --->
 
-# Learning Through Exercises
+# Signal Encoding
 
 ## 1) Introduction
-Learning by doing is one of the most effective methods to acquire new knowledge and skills. Rather than passively consuming information, actively engaging in problem-solving fosters deeper understanding and long-term retention. By working through structured exercises, students can grasp complex concepts in a more intuitive and applicable way. This approach is particularly beneficial in technical fields like programming, mathematics, and engineering.
+Think of a picture in your mind. 
+If you want to communicate this to someone else, it's neccessary to search for a common medium, that you can manipulate and your recepient can observe. 
+This can be a piece of paper that you draw on, your hands with which you wave or the air-pressure which they can sense with their ears. 
+When it comes to machine-to-machine communication, this holds also true.
+
+---
+
+Imagine you are standing at a lake. 
+Across the lake, there is another person you want to communicate with. 
+You shout and shout, but you can't hear each others voices. 
+A great engineer comes along, hands you a super-fast waterpump and shows you well near by to manipulate the waterheight in the lake.
+Your partner gets a yardstick that he sticks vertically into the water of the lake to measure the waterheight. 
+Additionally you both get translation tables, that convert each letter of the alphabet in a series of five consecutive waterlevels.
+The table tells you the following:
+
+> We call each letter a letter.
+> We call each combination of 5 consecutive bits a symbol.
+> Each message contains exactly 10 symbols.
+> If a message has less than 10 symbols the last symbols get stuffed with whitespace.
+> Each message is prefixed with a sequence of low-low-low-high-low called start-sequence.
+> The receiver has to syncronize his stopwatch with the high-level-length of the start-sequence.
+> The lenght of a level may change from message to message, but never within the message.
+> This LLLHL not part of any symbol.
+> The channel is always low when no message is being send.
+
+
+| Zeichen        | H/L-Code | Binär  |
+|----------------|-----------|--------|
+| A              | LLLLL     | 00000  |
+| B              | LLLLH     | 00001  |
+| C              | LLLHH     | 00011  |
+| Start-Sequence | LLLHL     | 00010  |
+| D              | LLHLL     | 00100  |
+| E              | LLHLH     | 00101  |
+| F              | LLHHL     | 00110  |
+| G              | LLHHH     | 00111  |
+| H              | LHLLL     | 01000  |
+| I              | LHLLH     | 01001  |
+| J              | LHLHL     | 01010  |
+| K              | LHLHH     | 01011  |
+| L              | LHHLL     | 01100  |
+| M              | LHHLH     | 01101  |
+| N              | LHHHL     | 01110  |
+| O              | LHHHH     | 01111  |
+| P              | HLLLL     | 10000  |
+| Q              | HLLLH     | 10001  |
+| R              | HLLHL     | 10010  |
+| S              | HLLHH     | 10011  |
+| T              | HLHLL     | 10100  |
+| U              | HLHLH     | 10101  |
+| V              | HLHHL     | 10110  |
+| W              | HLHHH     | 10111  |
+| X              | HHLLL     | 11000  |
+| Y              | HHLLH     | 11001  |
+| Z              | HHLHL     | 11010  |
+| Space          | HHLHH     | 11011  |
+
+With these rules, you can now send messages to your opposite, by filling the lake with more water, or pumping it out!
 
 ### 1.1) Further Readings and Other Sources
-- [The Importance of Practice in Learning](https://www.sciencedirect.com/science/article/pii/S036013151300062X)
-- "The Art of Learning" by Josh Waitzkin
-- [How to Learn Effectively: 5 Key Strategies](https://www.edutopia.org/article/5-research-backed-learning-strategies)
+
+- **Claude Shannon – "A Mathematical Theory of Communication"**  
+  The foundational paper that introduced the concept of information theory and formalized communication channels.
+
+- **Brian W. Kernighan & Rob Pike – "The Practice of Programming"**  
+  Contains practical insights into how data is structured and transmitted, with emphasis on clear representation and protocols.
+
+- **Andrew S. Tanenbaum – "Computer Networks"**  
+  A comprehensive resource for understanding network layers, encoding schemes, and data transmission principles.
+
+- **Simon Singh – "The Code Book"**  
+  A popular science book on the history of codes and encoding, perfect for building intuition and appreciation of symbolic systems.
+
+- **Ben Eater – [YouTube: "How computers send data"]**  
+  A highly visual and beginner-friendly explanation of bit-level communication and encoding schemes.  
+  → https://www.youtube.com/watch?v=3EN8CWhOZiU
+
 
 ## 2) Tasks
-1. **Write a Summary**: Summarize the concept of "learning by doing" in 3-5 sentences.
-2. **Example Identification**: List three examples from your own experience where learning through exercises helped you understand a topic better.
-3. **Create an Exercise**: Design a simple exercise for a topic of your choice that someone else could use to practice.
-4. **Follow an Exercise**: Find an online tutorial that includes exercises and complete at least two of them.
-5. **Modify an Existing Exercise**: Take a basic problem from a textbook or online course and modify it to make it slightly more challenging.
-6. **Pair Learning**: Explain a concept to a partner and guide them through an exercise without giving direct answers.
-7. **Review Mistakes**: Look at an exercise you've previously completed incorrectly. Identify why the mistake happened and how to prevent it in the future.
-8. **Time Challenge**: Set a timer for 10 minutes and try to solve as many simple exercises as possible on a given topic.
-9. **Self-Assessment**: Create a checklist to evaluate your own performance in completing exercises effectively.
-10. **Reflect on Progress**: Write a short paragraph on how this structured approach to exercises has influenced your learning.
 
-<details>
-  <summary>Tip for Task 5</summary>
-  Try making small adjustments first, such as increasing the difficulty slightly or adding an extra constraint.
-</details>
+1. **Decode a Message**: Given the sequence `LLLHL LLHLL HLHLL HLHHL HLHLH LLLLH`, decode it using the symbol table provided.
+![exercise waveform](https://maxclerkwell.github.io/svg_storage/fundamentals/waveforms/exercise_message_01.wavedrom.svg)
+
+2. **Design a Message**: Encode the message `HELLO` using the H/L-Code, including the correct start-sequence and padding with `Space` if needed.
+3. **Detect Invalid Symbols**: Check the sequence `LLLHL LLLLH LLHLL LLLHL` and identify which symbols are valid and which one(s) violate the constraints.
+4. **Modify a Symbol**: Choose any symbol from the table and create a new version by flipping a single bit. Check whether the new code remains valid (i.e. does not become the start-sequence).
+5. **Channel State Analysis**: If no message is transmitted, what is the expected level on the channel?
+6. **Design Your Own Encoding Rule**: Propose a new forbidden pattern (e.g. `HHLLH`) and list which existing symbols would become invalid under this rule.
 
 ## 3) Questions
-1. What are the main benefits of learning through exercises compared to passive learning?
-2. How do exercises improve long-term retention?
-3. Can you think of a subject where learning through exercises might be less effective? Why?
-4. What role does feedback play in learning through exercises?
-5. How can self-designed exercises improve understanding?
-6. Why is it beneficial to review past mistakes in exercises?
-7. How does explaining a concept to someone else reinforce your own understanding?
-8. What strategies can you use to stay motivated when practicing with exercises?
-9. How can timed challenges contribute to learning efficiency?
-10. How do exercises help bridge the gap between theory and practical application?
+1. How does the continuous low-level help the receiver understanding messages?
+2. If each level in the symbol lasts 5 seconds, how long does it take to transmit one full message (including start-sequence and 10 symbols)?
+3. How many full messages can be transported over this channel per minute?
+4. What parameters could an engineer change about the general system to increase the message-throughput?
+5. Explain why it would take infinite power to change the water-level from low to high instantaneously.
 
 ## 4) Advice
-Practice consistently and seek out diverse exercises that challenge different aspects of a topic. Combine exercises with reflection and feedback to maximize your learning efficiency. Don't hesitate to adapt exercises to fit your own needs and ensure that you're actively engaging with the material, rather than just going through the motions.
+Communication is not just about sending data — it's about ensuring the receiver can make sense of it.  
+Whether you're flipping water levels, sending voltage pulses, or transmitting bits across fiber optics, clarity, structure, and timing are key.  
+So when designing or analyzing any signal encoding system, always ask yourself:
 
+> Can the receiver know *when* to listen, *what* to listen for, and *how* to interpret it?
+
+Mastering this mindset will not only help you understand communication systems, but also make you a better programmer, engineer, and thinker.
