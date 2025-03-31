@@ -36,7 +36,7 @@ The table tells you the following:
 > The channel is always low when no message is being send.
 
 
-| Zeichen        | H/L-Code | Binär  |
+| Letter        | H/L-Code | Binary  |
 |----------------|-----------|--------|
 | A              | LLLLL     | 00000  |
 | B              | LLLLH     | 00001  |
