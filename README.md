@@ -17,7 +17,7 @@ When it comes to machine-to-machine communication, this holds also true.
 
 ---
 
-<img src="lake.svg" width="200" alt="illustration">
+<img src="lake.svg" width="600" alt="illustration">
 Imagine you are standing at a lake. 
 Across the lake, there is another person you want to communicate with. 
 You shout and shout, but you can't hear each others voices. 
